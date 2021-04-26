@@ -1,9 +1,21 @@
 import React from "react";
+import App from "next/app";
 import { AppProps } from "next/app";
 import "../styles/globals.css";
 
-const App: React.FC<AppProps> = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
-};
+const Noop: React.ElementType = ({ children }) => children;
 
-export default App;
+export default class MyApp extends App<
+  AppProps & { Component: { Layout: React.FC | React.ElementType } }
+> {
+  render() {
+    const { Component, pageProps } = this.props;
+    const Layout = Component.Layout || Noop;
+
+    return (
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    );
+  }
+}

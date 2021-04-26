@@ -1,7 +1,9 @@
+import React from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import BlueLayout from "../layouts/BlueLayout";
 
-export default function Home() {
+const Home: React.FC & { Layout: React.FC } = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -9,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={`${styles.main} bg-blue-300`}>
+      <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -62,4 +64,8 @@ export default function Home() {
       </footer>
     </div>
   );
-}
+};
+
+Home.Layout = BlueLayout;
+
+export default Home;
